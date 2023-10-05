@@ -63,7 +63,7 @@ public class App extends MultiDexApplication {
     private void initParams() {
         // Hawk
         Hawk.init(this).build();
-        putDefault(HawkConfig.API_URL, "https://raw.githubusercontent.com/c120487/00/main/0515.txt");
+        putDefault(HawkConfig.API_URL, "https://raw.githubusercontent.com/c120487/00/main/000814.txt");
         putDefault(HawkConfig.HOME_REC, 1);                 // Home Rec 0=豆瓣, 1=推荐, 2=历史
         putDefault(HawkConfig.HOME_REC_STYLE, true);
 		
