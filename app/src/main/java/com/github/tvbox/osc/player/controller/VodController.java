@@ -71,7 +71,7 @@ public class VodController extends BaseController {
                         mTopRoot1.setVisibility(VISIBLE);
                         mTopRoot2.setVisibility(VISIBLE);
                         mPlayTitle.setVisibility(GONE);
-                        mNextBtn.requestFocus();
+                        mPlayerSpeedBtn.requestFocus();
                         backBtn.setVisibility(ScreenUtils.isTv(context) ? INVISIBLE : VISIBLE);
                         showLockView();
                         break;
@@ -382,16 +382,27 @@ public class VodController extends BaseController {
         mPlayerSpeedBtn.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                try {
-                    mPlayerConfig.put("sp", 1.0f);
-                    updatePlayerCfgView();
-                    listener.updatePlayerCfg();
-                    speed_old = 1.0f;
-                    mControlWrapper.setSpeed(1.0f);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                float currentSpeed = mControlWrapper.getSpeed();
+                if (currentSpeed == 1.0f) {
+                    try {
+                        mPlayerConfig.put("sp", 2.0f);
+                        updatePlayerCfgView();
+                        listener.updatePlayerCfg();
+                        mControlWrapper.setSpeed(2.0f);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        mPlayerConfig.put("sp", 1.0f);
+                        updatePlayerCfgView();
+                        listener.updatePlayerCfg();
+                        mControlWrapper.setSpeed(1.0f);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-                return true;
+               return true;
             }
         });
         mPlayerBtn.setOnClickListener(new OnClickListener() {
@@ -631,7 +642,7 @@ public class VodController extends BaseController {
                 hideBottom();
             }
         });
-        mNextBtn.setNextFocusLeftId(R.id.play_time_start);
+        //mNextBtn.setNextFocusLeftId(R.id.play_time_start);
     }
 
     private void hideLiveAboutBtn() {
